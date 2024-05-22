@@ -1,7 +1,6 @@
 const express = require("express");
 const puppeteer = require("puppeteer");
 const app = express();
-const path = require("path");
 const port = 4005;
 
 app.set("view engine", "ejs");
@@ -12,10 +11,8 @@ app.get("/", async (req, res) => {
   const amazonURL =
     "https://www.amazon.in/gp/browse.html?node=4092115031&ref_=nav_em_sbc_tvelec_gaming_consoles_0_2_9_12";
 
-  const browser = await puppeteer.launch({
-    executablePath:
-      "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-  });
+  // Launch Puppeteer without specifying executablePath to use built-in Chromium
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   await page.goto(amazonURL);
