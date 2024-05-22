@@ -1,19 +1,21 @@
 const express = require("express");
 const puppeteer = require("puppeteer");
 const app = express();
-const path = require("path"); 
+const path = require("path");
 const port = 4005;
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
-app.use(express.static('public'))
-
+app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
   const amazonURL =
-  "https://www.amazon.in/gp/browse.html?node=4092115031&ref_=nav_em_sbc_tvelec_gaming_consoles_0_2_9_12";
+    "https://www.amazon.in/gp/browse.html?node=4092115031&ref_=nav_em_sbc_tvelec_gaming_consoles_0_2_9_12";
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    executablePath:
+      "C://Program Files (x86)//Google//Chrome//Application//chrome.exe",
+  });
   const page = await browser.newPage();
 
   await page.goto(amazonURL);
@@ -28,8 +30,11 @@ app.get("/", async (req, res) => {
       }));
     }
   );
+
   console.log(data);
-  res.render("index", {data});
+  res.render("index", { data });
+
+  await browser.close();
 });
 
 app.listen(port, () => {
