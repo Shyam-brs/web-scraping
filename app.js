@@ -14,7 +14,7 @@ app.get("/", async (req, res) => {
 
   const browser = await puppeteer.launch({
     executablePath:
-      "C://Program Files (x86)//Google//Chrome//Application//chrome.exe",
+      "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
   });
   const page = await browser.newPage();
 
